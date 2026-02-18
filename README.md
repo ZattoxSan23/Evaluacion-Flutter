@@ -100,6 +100,21 @@ Pantallas enfocadas en la visualización de resultados y seguimiento personal.
   <img src="https://github.com/user-attachments/assets/0ec4cc12-e0c7-482c-a5fd-6f4537633171" width="240"/>
 </p>
 
+
+
+
+DEMO
+
+
+https://nimble-conkies-f9047e.netlify.app 
+
+CUENTA
+
+ENTRENADOR : treno@gmail.com CONTRASEÑA : 123456 
+CLIENTE : gladys@gmail.com  CONTRASEÑA : 19325035
+ADMINISTRADOR: administrador@gym.com CONTRASEÑA: 123456
+
+
 ---
 
 ## ⚙️ Cómo Ejecutar el Proyecto
