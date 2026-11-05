@@ -51,12 +51,12 @@ class _WorkoutTimerScreenState extends State<WorkoutTimerScreen> {
 
   Future<void> _keepScreenAwake() async {
     await WakelockPlus.enable();
-    setState(() => _keepScreenOn = true);
+    if (mounted) setState(() => _keepScreenOn = true);
   }
 
   Future<void> _allowScreenSleep() async {
     await WakelockPlus.disable();
-    setState(() => _keepScreenOn = false);
+    if (mounted) setState(() => _keepScreenOn = false);
   }
 
   void _initializeWorkout() {
@@ -164,9 +164,15 @@ class _WorkoutTimerScreenState extends State<WorkoutTimerScreen> {
   void _startTimer() {
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (!mounted) {
+        timer.cancel();
+        return;
+      }
       if (_remainingSeconds > 0) {
         setState(() => _remainingSeconds--);
-      } else {
+      }
+      // Complete on the tick that reaches zero, without an extra second.
+      if (_remainingSeconds <= 0) {
         timer.cancel();
         _handleTimerCompletion();
       }
