@@ -1,3 +1,43 @@
+# Evaluaciones deportivas — Flutter
+
+Aplicación Flutter/Dart conectada a Supabase, con pantallas para administrador, entrenador y cliente. Contiene gestión de rutinas, planes de alimentación, medidas y un temporizador de entrenamiento con videos.
+
+## Ejecutar y verificar
+
+```sh
+flutter pub get
+flutter run
+flutter analyze
+flutter test
+```
+
+Usa una versión de Flutter compatible con las dependencias de `pubspec.yaml` y Dart 3.3 o superior. Las carpetas Android/iOS/web/desktop no garantizan que todos los plugins funcionen en cada plataforma: verifica especialmente YouTube, tareas en segundo plano y wakelock en el destino elegido.
+
+## Datos y acceso
+
+`lib/core/supabase_client.dart` inicializa la conexión pública existente. Las cuentas requieren perfil con rol `admin`, `trainer` o `client`. El proyecto no incluye un esquema completo y reproducible de Supabase ni cuentas demo provisionadas.
+
+Los permisos de las pantallas no sustituyen RLS. La recuperación de contraseña usa un deep link que requiere configuración adicional en la aplicación y Supabase.
+
+## Organización real
+
+- `lib/screens/`: implementación de pantallas y gran parte de las consultas.
+- `lib/core/supabase_client.dart`: cliente compartido.
+- `lib/models/`: modelos y serialización.
+- `lib/services/`, `lib/providers/` y algunos widgets contienen archivos vacíos: son estructura pendiente, no una capa de servicios implementada.
+
+El temporizador cancela su Timer al salir, evita actualizar estado tras desmontarse y finaliza en el tick que llega a cero. Sigue necesitando una estrategia basada en tiempo real para suspensión de la app o bloqueo del dispositivo.
+
+## Pruebas
+
+`test/widget_test.dart` verifica el botón de formulario real: envío, estado deshabilitado y bloqueo durante carga. No inicializa Supabase ni depende de cuentas externas. Se retiró la prueba de contador de la plantilla porque la app no tiene ese contador.
+
+## Pendientes
+
+Extraer consultas de pantallas a servicios de verdad; completar o eliminar archivos vacíos; versionar esquema/RLS y seed de demostración; probar sesiones vencidas, navegación durante cargas y recuperación de contraseña; persistir progreso del entrenamiento y definir soporte por plataforma.
+
+## Capturas y descripción original
+
 # 🏋️‍♂️ App Multiplataforma para Evaluaciones Deportivas
 
 Aplicación **multiplataforma desarrollada en Flutter** orientada a la **gestión y evaluación del rendimiento deportivo**, con distintos roles de usuario y flujos personalizados según permisos.

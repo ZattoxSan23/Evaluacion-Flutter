@@ -26,11 +26,14 @@ class _SplashScreenState extends State<SplashScreen> {
     // Esperar un poco para mostrar el splash
     await Future.delayed(const Duration(milliseconds: 500));
 
+    if (!mounted) return;
+
     // Verificar si hay sesión activa
     final session = supabase.auth.currentSession;
 
     if (session == null) {
       // No hay sesión, ir a login
+      if (!mounted) return;
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const LoginScreen()),
